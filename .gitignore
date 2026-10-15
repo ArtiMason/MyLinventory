@@ -1,0 +1,7 @@
+snapshots/*.json
+snapshots/*.csv
+logs/*.log
+*.tmp
+*.swp
+config/secrets.config
+
