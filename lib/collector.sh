@@ -6,7 +6,7 @@ function get_ip(){
     hostname -I
 }
 function get_cpu(){
-    grep "model name" | head -n 1 | cut -d ':' -f 2 | xargs
+    grep "model name" /proc/cpuinfo | head -n 1 | cut -d ':' -f 2 | xargs
 }
 function get_ram(){
     free -h | grep "Mem:" | awk '{print $2 "total, " $3 "used, " $4 "free "}'
