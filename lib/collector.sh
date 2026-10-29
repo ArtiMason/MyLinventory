@@ -9,7 +9,7 @@ function get_cpu(){
     grep "model name" /proc/cpuinfo | head -n 1 | cut -d ':' -f 2 | xargs
 }
 function get_ram(){
-    free -h | grep "Mem:" | awk '{print $2 "total, " $3 "used, " $4 "free "}'
+    free -h | grep "Mem:" | awk '{print $2 " total, " $3 " used, " $4 " free "}'
 }
 function get_df(){
     df -h --output=source,size,used,pcent,target -x tmpfs -x devtmpfs

@@ -2,10 +2,15 @@
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 source "$SCRIPT_DIR/../lib/collector.sh"
+source "$SCRIPT_DIR/../lib/formatter.sh"
 
-echo "----System parameters----"
-echo "Hostname: $(get_hostname)"
-echo "IP Address: $(get_ip)"
-echo "CPU: $(get_cpu)"
-echo "RAM: $(get_ram)"
-echo "Uptime: $(get_uptime)"
+OUTPUT_FILE="$SCRIPT_DIR/../snapshots/inventory.json"
+echo "{" > "$OUTPUT_FILE"
+format_json "hostname" "$(get_hostname)" >> "$OUTPUT_FILE"
+format_json "ip" "$(get_ip)" >> "$OUTPUT_FILE"
+format_json "cpu" "$(get_cpu)" >> "$OUTPUT_FILE"
+format_json "ram" "$(get_ram)" >> "$OUTPUT_FILE" 
+sed -i '$ s/,$//' "$OUTPUT_FILE"
+echo "}" >> "$OUTPUT_FILE"
+
+echo "Inventory saved on $OUTPUT_FILE"
